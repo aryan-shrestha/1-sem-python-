@@ -1,0 +1,4 @@
+home loan,10.5,11,11.5,12
+education loan,11,11.5,12.0,-
+private loan,10.5,11,-,-
+commercial loan,12,-,-,-

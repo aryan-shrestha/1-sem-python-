@@ -1,0 +1,5 @@
+aryan,dhulabari,aryan@gmail.com,9869773639,male,2626266,aryan,password123,False,True
+aryan,dhulabari,aryan@gmail.com,989898989,male,56565656,anisha,password123,False,False
+chandra shrestha,kathmandu,chandra@gmail.com,98989898,male,56565656,chandra,password123,False,False
+aryan,dhulabari,aryan@gmail.com,98989898,20202020,male,nisha,password@23,False,False
+aryan,dhulabari,aryan@gmail.com,9869773639,male,2626266,aryan2,password123,False,False
