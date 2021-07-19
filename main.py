@@ -58,13 +58,13 @@ def admin_view():
         if user_input == 1:
             # function to verify the customer user
             def admin_func_1():
-                print("Below is the list of the unverified users: ")
+                print("Below is the list of the unverified users: \n")
                 admin.list_unverified_users()
                 user_input = input("Do you want to verify user?(y/n)")
                 while user_input == 'y':
                     username = input("Enter username of customer you want to verify: ")
                     if admin.verify_customer(username):
-                        print(f"{username} verified!")
+                        print(f"\n{username} verified!\n")
                         admin_func_1()
                 admin_view()
             admin_func_1()
@@ -72,21 +72,22 @@ def admin_view():
         elif user_input == 2:
             # function to verify the customer loan
             def admin_func_2():
-                print("Below is the list of the unverified users: ")
+                print("Below is the list of the unverified users: \n")
                 admin.list_unverified_loan()
-                user_input = input("Do you want to  verify loan?(y/n)")
+                user_input = input("Do you want to  verify loan?(y/n)\n")
                 while user_input == 'y':
-                    username = input("Enter username of customer whose loan you want to verify: ")
-                    if admin.verify_loan(username):
-                        print(f"loan for the customer with {username} has been verified")
+                    loan_id = input("Enter loan ID you want to verify: ")
+                    if admin.verify_loan(loan_id):
+                        print(f"loan for the customer with {loan_id} has been verified\n")
                         admin_func_2()
                 admin_view()
             admin_func_2()
         
         elif user_input == 3:
             def admin_func_3():
-                print("Below are the loans that are verified: ")
+                print("Below are the loans that are verified: \n")
                 admin.list_verified_loan()
+                admin_view()
             admin_func_3()
     except:
         print("Invalid Input!")
@@ -127,12 +128,19 @@ def customer_view(username):
                     print("Your request for the loan with following details has been submited..\n")
                     print("Loan details:")
                     print(f"principle = {loan_detail[0]}, time = {loan_detail[1]}, rate = {loan_detail[2]}, loan_detail = {loan_detail[3]}\n")
+                    customer_view(username)
             customer_func_1(username)
-            
+
         elif user_choice == 2:
             # Function to pay installment on loan
-            def customer_func_2():
-                pass
+            def customer_func_2(username):
+                print("Below are the loans you have to pay: \n")
+                customer.see_all_loan(username)
+                user_input = input("\nDo you want to pay installment(y/n)? ")
+                while user_input == "y":
+                    loan_id = input("Enter loan ID: ")
+                    customer.see_loan_detail(username, loan_id)
+                    
             
 def home_view():
     try:
