@@ -156,7 +156,29 @@ def customer_view(username):
                     customer_func_2(username)
                 customer_view(username)
             customer_func_2(username)
-            
+
+        elif user_choice == 3:
+            def user_choice_3(username):
+                print("Below are your transactions:\n")
+                customer.view_transactions(username)
+                input("\nPress any key to go back..")
+                customer_view(username)
+            user_choice_3(username)
+        
+        elif user_choice == 4:
+            def user_choice_4(username):
+                print("Below are your loans and their current status: \n")
+                headers = ["Loan ID", "Username", "Principle", "Time", "Interest", "Rate", "Is Verified", "Amount"]
+                loan_list = customer.see_loan_status(username)
+                print(tabulate.tabulate(loan_list, headers=headers))
+                input("\n Press any key to go back..")
+                customer_view(username)    
+            user_choice_4(username)
+        
+        elif user_choice == 5:
+            print("Logged Out from the system.")
+            home_view()
+
 def home_view():
     try:
         user_choice = int(input("""
@@ -174,5 +196,6 @@ def home_view():
             customer_login_view()
         elif user_choice == 3:
             create_user_view()
+
 home_view()
 

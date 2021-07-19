@@ -37,23 +37,40 @@ def see_loan_detail(username, loan_id):
             selected_loan = loan
     p = float(selected_loan[2])
     i = float(selected_loan[4])
-    a = p + i
+    a = float(selected_loan[-1])
     return p,i,a
 
 def pay_loan(username, loan_id, installment_amount):
     p,i,a = see_loan_detail(username, loan_id)
     a = a - installment_amount
-    
     loan_list = utils.text_to_list('loan.txt', 'r')
     
     for loan in loan_list:
         if loan[0] == loan_id:
             loan[-1] = a
+            with open("transactions.txt", "a+") as transaction_file:
+                transaction_file.write(f"{loan[0]},{loan[1]},loan installment payment,{installment_amount},{a}\n")
             break
-    
-    with open("loan.txt", 'w+') as file:
+
+    with open("loan.txt", 'w+') as loan_file:
         for loan in loan_list:
-            file.write(f"{loan[0]},{loan[1]},{loan[2]},{loan[3]},{loan[4]},{loan[5]},{loan[6]},{loan[7]}\n")
+            loan_file.write(f"{loan[0]},{loan[1]},{loan[2]},{loan[3]},{loan[4]},{loan[5]},{loan[6]},{loan[7]}\n")
+    
     return a
 
+def view_transactions(username):
+    transaction_list = utils.text_to_list("transactions.txt", "r")
+    user_transactions = []
+    for transaction in transaction_list:
+        if transaction[1] == username:
+            user_transactions.append(transaction)
+    headers = ['Loan Id', 'User', 'Description', 'Amount Payed', 'Remaining Amount']
+    print(tabulate.tabulate(user_transactions, headers=headers))
 
+def see_loan_status(username):
+    loan_list = utils.text_to_list('loan.txt', 'r')
+    user_loans = []
+    for loan in loan_list:
+        if loan[1] == username:
+            user_loans.append(loan)   
+    return user_loans
