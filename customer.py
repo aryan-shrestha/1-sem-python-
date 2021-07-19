@@ -27,7 +27,7 @@ def see_all_loan(username):
     for loan in loan_list:
         if loan[1] == username:
             if loan[-2] == "True":
-                user_loans.append(loan)
+                user_loans.append(loan)   
     return user_loans
 
 def see_loan_detail(username, loan_id):

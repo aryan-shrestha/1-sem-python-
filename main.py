@@ -1,6 +1,7 @@
 import auth
 import customer
 import admin
+import tabulate
 
 # fuction to create user. by default registered user is neither active user not admin user
 def create_user_view():
@@ -135,12 +136,26 @@ def customer_view(username):
             # Function to pay installment on loan
             def customer_func_2(username):
                 print("Below are the loans you have to pay: \n")
-                customer.see_all_loan(username)
+                headers = ["Loan ID", "Username", "Principle", "Time", "Interest", "Rate", "Is Verified", "Amount"]
+                loan_list = customer.see_all_loan(username)
+                print(tabulate.tabulate(loan_list, headers=headers))
+
                 user_input = input("\nDo you want to pay installment(y/n)? ")
                 while user_input == "y":
                     loan_id = input("Enter loan ID: ")
-                    customer.see_loan_detail(username, loan_id)
-                    
+                    p,i,a = customer.see_loan_detail(username, loan_id)
+                    loan_detail = [[p,i,a]]
+                    header = ["Principle", "Interest", "Amount"]
+                    print(tabulate.tabulate(loan_detail, headers=header))
+                    installment_amount = float(input("Enter Installment amount: "))
+                    remaining_amount = customer.pay_loan(username, loan_id, installment_amount)
+                    print(f"""
+                    {installment_amount} successfully deducted from the total payable amount.
+                    Your remaining payable amount is {remaining_amount}
+                    """)
+                    customer_func_2(username)
+                customer_view(username)
+            customer_func_2(username)
             
 def home_view():
     try:
