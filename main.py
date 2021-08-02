@@ -54,6 +54,7 @@ def admin_view():
     1) Verify New users
     2) Verify Loan request
     3) See all verified Loan
+    4) See all transactions
     """))
     try:
         if user_input == 1:
@@ -88,8 +89,20 @@ def admin_view():
             def admin_func_3():
                 print("Below are the loans that are verified: \n")
                 admin.list_verified_loan()
+                input("Press any key to go back..")
                 admin_view()
             admin_func_3()
+
+        elif user_input == 4:
+            def admin_func_4():
+                print("All the trasactions are listed below: \n")
+                transaction_list = admin.see_all_transaction()
+                headers = ["Loan ID", "Username", "Principle", "Time", "Interest", "Rate", "Is Verified", "Amount"]
+                print(tabulate.tabulate(transaction_list, headers))
+                input("Press any enter to go back..")
+                admin_view()
+            admin_func_4()
+
     except:
         print("Invalid Input!")
         admin_view()

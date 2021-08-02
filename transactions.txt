@@ -1,1 +1,1 @@
-ea8f66fa-14be-4aed-801d-2931ed3ab3bc,aryan,payment,50.0,250.0
+e7a8a0e4-21b9-4b34-8400-e0a87941c284,aryan,loan installment payment,4000.0,10800.0
